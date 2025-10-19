@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>Email Test - HackVibe 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        input,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .success {
+            background: rgba(76, 175, 80, 0.3);
+        }
+
+        .error {
+            background: rgba(244, 67, 54, 0.3);
+        }
+
+        .info {
+            background: rgba(33, 150, 243, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧪 Email Test - HackVibe 2025</h1>
+        <p>Test your email verification setup without going through the full registration process.</p>
+
+        <form id="emailTestForm">
+            <input type="email" id="testEmail" placeholder="Enter your email address" required>
+            <input type="text" id="teamName" placeholder="Enter team name" value="Test Team" required>
+            <button type="submit">Send Test Email</button>
+        </form>
+
+        <div id="result" class="result" style="display: none;"></div>
+
+        <div class="info" style="margin-top: 20px;">
+            <h3>📧 Setup Instructions:</h3>
+            <ol>
+                <li><strong>Resend (Recommended):</strong> Sign up at <a href="https://resend.com" target="_blank"
+                        style="color: #fff;">resend.com</a>, verify your domain, and get API key</li>
+                <li><strong>EmailJS (Free):</strong> Sign up at <a href="https://emailjs.com" target="_blank"
+                        style="color: #fff;">emailjs.com</a>, create service and template</li>
+                <li>Create <code>.env.local</code> file with your API credentials</li>
+                <li>Restart your development server</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('emailTestForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('testEmail').value;
+            const teamName = document.getElementById('teamName').value;
+            const resultDiv = document.getElementById('result');
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '🔄 Sending test email...';
+
+            try {
+                // Generate a test verification token
+                const verificationToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                const verificationUrl = `${window.location.origin}/verify-email?token=${verificationToken}`;
+
+                // Try Resend API first
+                const response = await fetch('/api/send-verification-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email,
+                        teamName,
+                        verificationUrl
+                    })
+                });
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        ✅ <strong>Email sent successfully!</strong><br>
+                        📧 Check your inbox at: ${email}<br>
+                        🔗 Verification URL: ${verificationUrl}<br>
+                        🎯 Team: ${teamName}
+                    `;
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'API request failed');
+                }
+
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    ❌ <strong>Email sending failed!</strong><br>
+                    Error: ${error.message}<br><br>
+                    <strong>Next steps:</strong><br>
+                    1. Check if you've set up your email service<br>
+                    2. Verify your API keys in .env.local<br>
+                    3. Make sure your domain is verified<br>
+                    4. Check the browser console for more details
+                `;
+                console.error('Email test error:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

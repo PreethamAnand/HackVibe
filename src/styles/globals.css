@@ -1,0 +1,552 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 262.1 83.3% 57.8%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 187.2 93.2% 42.7%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 327.4 73.3% 62.7%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 262.1 83.3% 57.8%;
+  --radius: 0.5rem;
+  --chart-1: 262.1 83.3% 57.8%;
+  --chart-2: 187.2 93.2% 42.7%;
+  --chart-3: 327.4 73.3% 62.7%;
+  --chart-4: 160.4 84.1% 39.4%;
+  --chart-5: 43.3 96.4% 56.5%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 262.1 83.3% 57.8%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 187.2 93.2% 42.7%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 327.4 73.3% 62.7%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 262.1 83.3% 57.8%;
+  --chart-1: 262.1 83.3% 57.8%;
+  --chart-2: 187.2 93.2% 42.7%;
+  --chart-3: 327.4 73.3% 62.7%;
+  --chart-4: 160.4 84.1% 39.4%;
+  --chart-5: 43.3 96.4% 56.5%;
+}
+
+* {
+  border-color: hsl(var(--border));
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  /* Account for fixed header */
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  touch-action: manipulation;
+}
+
+/* Prevent text selection on non-interactive elements */
+body,
+div,
+section,
+article,
+aside,
+header,
+footer,
+nav,
+main {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Mobile font size consistency */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1,
+  .text-4xl,
+  .text-5xl,
+  .text-6xl {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+
+  h2,
+  .text-3xl,
+  .text-4xl {
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+  }
+
+  h3,
+  .text-2xl {
+    font-size: 1.125rem !important;
+    line-height: 1.4 !important;
+  }
+
+  h4,
+  .text-xl {
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+  }
+
+  h5,
+  h6,
+  .text-lg {
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+  }
+
+  p,
+  .text-base {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .text-sm {
+    font-size: 0.75rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .text-xs {
+    font-size: 0.6875rem !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* Allow text selection on interactive elements and content */
+button,
+input,
+textarea,
+a,
+[role="button"],
+[tabindex],
+.selectable-text {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Improve touch targets for mobile */
+button,
+a,
+[role="button"],
+[tabindex] {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
+/* Prevent zoom on input focus on iOS */
+input,
+textarea,
+select {
+  font-size: 16px;
+  touch-action: manipulation;
+}
+
+/* Improve scrolling performance */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Improve mobile experience */
+@media (pointer: coarse) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Prevent overscroll bounce and horizontal swipe back issues */
+html,
+body {
+  overscroll-behavior-x: none;
+}
+
+/* Fix for iOS Safari viewport issues */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Custom cyberpunk utilities */
+.glow-purple {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+}
+
+.glow-pink {
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+}
+
+.glow-green {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+
+.glassmorphism {
+  background: rgba(20, 20, 30, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.neon-border {
+  border: 1px solid;
+  border-image: linear-gradient(45deg, #8b5cf6, #06b6d4, #ec4899) 1;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, #8b5cf6, #06b6d4, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  from {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+  }
+
+  to {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.8), 0 0 40px rgba(6, 182, 212, 0.3);
+  }
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch:hover::before,
+.glitch:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch:hover::before {
+  animation: glitch-1 0.5s infinite;
+  color: #8b5cf6;
+  z-index: -1;
+}
+
+.glitch:hover::after {
+  animation: glitch-2 0.5s infinite;
+  color: #06b6d4;
+  z-index: -2;
+}
+
+@keyframes glitch-1 {
+
+  0%,
+  14%,
+  15%,
+  49%,
+  50%,
+  99%,
+  100% {
+    transform: translate(0);
+  }
+
+  1%,
+  13% {
+    transform: translate(-2px, 2px);
+  }
+
+  16%,
+  48% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes glitch-2 {
+
+  0%,
+  20%,
+  21%,
+  62%,
+  63%,
+  99%,
+  100% {
+    transform: translate(0);
+  }
+
+  1%,
+  19% {
+    transform: translate(2px, 2px);
+  }
+
+  22%,
+  61% {
+    transform: translate(-2px, -2px);
+  }
+}
+
+/* Additional responsive utilities */
+.rotating-ring {
+  position: relative;
+}
+
+.rotating-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: conic-gradient(#8b5cf6, #06b6d4, #ec4899, #8b5cf6);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin 4s linear infinite;
+  pointer-events: none;
+}
+
+/* Floating dash along rounded border */
+.border-float {
+  position: relative;
+}
+
+.border-float-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.border-float-path {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 14 400;
+  /* small dash + long gap to look like a single floating dot */
+  animation: dash-move 3.5s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.6));
+}
+
+@keyframes dash-move {
+  to {
+    stroke-dashoffset: -414;
+  }
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+/* Improve focus states for accessibility */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.3);
+}
+
+/* Remove focus outline for buttons and links */
+button:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.3);
+}
+
+/* Remove focus outline for non-interactive elements */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Prevent horizontal scroll on mobile */
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Improve button and link interactions */
+button,
+a {
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+/* Remove default focus outline from all interactive elements */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[tabindex]:focus {
+  outline: none;
+}
+
+/* Only show focus outline when using keyboard navigation */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid hsl(var(--primary) / 0.5);
+  outline-offset: 2px;
+}
+
+/* Fix for sticky positioning on iOS */
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+/* Improve text readability */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Prevent layout shift */
+img {
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Improve form elements */
+input,
+textarea,
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.375rem;
+}
+
+/* Fix for iOS Safari input styling */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+textarea {
+  -webkit-appearance: none;
+  border-radius: 0.375rem;
+}
