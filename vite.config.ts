@@ -3,8 +3,8 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig({
-  base: "/HackVibe/",
   plugins: [react()],
+  base: "/HackVibe/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
